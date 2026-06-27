@@ -47,7 +47,11 @@ aggregators:
                    "systematic trader", "trading analyst", "graduate risk", "risk analyst",
                    "quantitative risk", "market risk"]
   arbeitnow:
-    enabled: true                    # free, no key; supplementary EU coverage
+    enabled: true                    # free, no key; EU coverage
+  remoteok:
+    enabled: true                    # free, no key; remote finance/quant roles
+  jobicy:
+    enabled: true                    # free, no key; global finance/trading roles
 
 # Watch list (PRIORITY firms only - not the limit). Freshest per-firm feeds + assessment criteria.
 firms:

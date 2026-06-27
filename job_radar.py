@@ -184,6 +184,47 @@ def fetch_arbeitnow(cfg):
         log(f"Arbeitnow: {e}")
     return out
 
+def fetch_remoteok(cfg):
+    """Free, no key — remote finance/quant roles."""
+    if not cfg.get("aggregators", {}).get("remoteok", {}).get("enabled"):
+        return []
+    out = []
+    try:
+        import requests
+        r = requests.get("https://remoteok.com/api", headers={**UA, "Accept": "application/json"}, timeout=30)
+        jobs = r.json()
+        for j in jobs:
+            if not isinstance(j, dict) or not j.get("position"): continue
+            out.append(norm(j.get("company", "?"), j.get("position"), j.get("location", "Remote"),
+                            j.get("url"), strip_html(j.get("description", "")), j.get("date")))
+        log(f"RemoteOK: {len(out)} raw results")
+    except Exception as e:
+        log(f"RemoteOK: {e}")
+    return out
+
+def fetch_jobicy(cfg):
+    """Free, no key — global job RSS feed filtered to finance/quant."""
+    if not cfg.get("aggregators", {}).get("jobicy", {}).get("enabled"):
+        return []
+    out = []
+    try:
+        import xml.etree.ElementTree as ET
+        text = get_text("https://jobicy.com/?feed=job_feed&job_categories=finance&job_types=full-time&search_keywords=trader+quant+risk")
+        root = ET.fromstring(text)
+        ns = {"content": "http://purl.org/rss/1.0/modules/content/"}
+        for item in root.findall(".//item"):
+            title = (item.findtext("title") or "").strip()
+            link  = (item.findtext("link") or "").strip()
+            desc  = strip_html(item.findtext("content:encoded", namespaces=ns) or item.findtext("description") or "")
+            loc   = (item.findtext("{http://www.jobicy.com/}jobLocation") or "").strip()
+            comp  = (item.findtext("{http://www.jobicy.com/}hiringOrganization") or "?").strip()
+            pub   = (item.findtext("pubDate") or "").strip()
+            out.append(norm(comp, title, loc, link, desc, pub))
+        log(f"Jobicy: {len(out)} raw results")
+    except Exception as e:
+        log(f"Jobicy: {e}")
+    return out
+
 def gather(cfg):
     jobs = []
     for firm in cfg.get("firms", []):
@@ -199,6 +240,8 @@ def gather(cfg):
         time.sleep(0.4)
     jobs += fetch_adzuna(cfg)
     jobs += fetch_arbeitnow(cfg)
+    jobs += fetch_remoteok(cfg)
+    jobs += fetch_jobicy(cfg)
     return jobs
 
 # ---------- filter / score / enrich ----------
