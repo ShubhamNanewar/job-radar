@@ -1,0 +1,49 @@
+name: Job Radar
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # every ~30 min (GitHub schedules in minutes, not seconds)
+
+  workflow_dispatch: {}    # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write          # to commit the digest/dashboard/seen-list
+  issues: write            # to open an issue for new roles
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run radar
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # optional, only if you enable model scoring
+        run: python job_radar.py
+
+      - name: Commit results
+        run: |
+          git config user.name  "job-radar"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "radar: $(date -u +%F-%H%M)" || echo "nothing to commit"
+          git push
+
+      - name: Open issue for new roles
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s new_digest.md ]; then
+            gh issue create \
+              --title "Job Radar — $(date -u +%F): new roles" \
+              --body-file new_digest.md
+          else
+            echo "No new roles this run."
+          fi

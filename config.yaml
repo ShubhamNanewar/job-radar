@@ -1,0 +1,99 @@
+# ===================== Job Radar config =====================
+# Give each firm a careers_url and the script auto-detects the ATS
+# (Greenhouse / Lever / Ashby / SmartRecruiters / Workday / Recruitee / Workable).
+# To check or find one yourself:  python job_radar.py --detect "<careers url>"
+# If auto-detect fails, set it explicitly, e.g.:
+#   - {name: "ABN AMRO", ats: "workday", params: {tenant: "abnamro", dc: "wd3", site: "ABNAMRO"}}
+
+profile:
+  name: Shubham Nanewar
+  keywords_strong:
+    [python, derivatives, options, "market making", probability, "quantitative finance",
+     volatility, var, cva, irrbb, risk, frm, cfa, trading, etf, "expected value",
+     "fixed income", "machine learning", statistics, "linear algebra"]
+
+filters:
+  title_include:
+    trading: ["graduate trader", "junior trader", "trainee trader", "trader trainee",
+              "options trader", "derivatives trader", "digital assets trader", "crypto trader",
+              "trading intern", "trader intern", "trading internship", "market maker",
+              "graduate trading", "trading graduate", "junior market maker", "quantitative trader",
+              "quant trader", "trading analyst", "quant trading", "systematic trader",
+              "execution trader", "qis", "quantitative investment", "trader"]
+    risk:    ["quant risk", "quantitative risk", "risk analyst", "risk manager",
+              "market risk", "model risk", "counterparty risk", "graduate risk",
+              "junior risk", "trading risk"]
+  title_exclude: ["senior", "head of", "vp ", "vice president", "director", "principal",
+                  "lead ", "manager,", "staff ", "expert", "team lead", "specialist iii"]
+  primary_locations: ["amsterdam", "netherlands", "nl", "the hague", "rotterdam", "utrecht", "eindhoven"]
+  eu_locations: ["london", "dublin", "paris", "frankfurt", "berlin", "madrid", "milan",
+                 "zurich", "geneva", "europe", "remote - eu", "emea", "munich", "lisbon",
+                 "brussels", "luxembourg", "warsaw"]
+  sponsorship_terms: ["visa", "sponsor", "sponsorship", "relocation", "relocate",
+                      "work permit", "right to work", "work authorization", "highly skilled migrant"]
+
+# Aggregators = the open net. These search EVERY company by keyword+location, so any firm
+# (Goldman, QRT, Cubist, brand-new entrants) shows up the moment it posts a matching role,
+# even if it is not in the firm list below. The firm list just adds the freshest per-firm
+# feeds plus assessment criteria for your priority targets.
+aggregators:
+  adzuna:
+    enabled: true
+    countries: [nl, gb, ie, de]      # add/remove; nl first
+    max_days_old: 21
+    # Free keys from https://developer.adzuna.com -> set as repo secrets ADZUNA_APP_ID / ADZUNA_APP_KEY
+    search_terms: ["graduate trader", "trainee trader", "junior trader", "options trader",
+                   "market maker", "trading internship", "graduate trading", "quantitative trader",
+                   "systematic trader", "trading analyst", "graduate risk", "risk analyst",
+                   "quantitative risk", "market risk"]
+  arbeitnow:
+    enabled: true                    # free, no key; supplementary EU coverage
+
+# Watch list (PRIORITY firms only - not the limit). Freshest per-firm feeds + assessment criteria.
+firms:
+  - {name: "Optiver",            careers_url: "https://optiver.com/working-at-optiver/career-opportunities/"}
+  - {name: "Flow Traders",       careers_url: "https://www.flowtraders.com/careers/job-search"}
+  - {name: "IMC",                careers_url: "https://www.imc.com/eu/careers"}
+  - {name: "Da Vinci",           careers_url: "https://www.davincitrading.com/vacancies/"}
+  - {name: "All Options",        careers_url: "https://www.alloptions.nl/careers"}
+  - {name: "Webb Traders",       careers_url: "https://www.webbtraders.com/careers/"}
+  - {name: "Northpool",          careers_url: "https://www.northpool.eu/careers"}
+  - {name: "DRW",                careers_url: "https://drw.com/work-at-drw/listings"}
+  - {name: "Tibra",              careers_url: "https://www.tibra.com/careers/"}
+  - {name: "Mako",               careers_url: "https://mako.com/careers/"}
+  - {name: "Akuna Capital",      careers_url: "https://akunacapital.com/careers"}
+  - {name: "SIG",                careers_url: "https://careers.sig.com/"}
+  - {name: "Jump Trading",       careers_url: "https://www.jumptrading.com/careers/"}
+  - {name: "Citadel Securities", careers_url: "https://www.citadelsecurities.com/careers/open-opportunities/"}
+  - {name: "Jane Street",        careers_url: "https://www.janestreet.com/join-jane-street/open-positions/"}
+  - {name: "Five Rings",         careers_url: "https://www.fiverings.com/careers"}
+  # --- Banks (risk roles) ---
+  - {name: "ABN AMRO",           careers_url: "https://www.abnamro.com/careers"}
+  - {name: "ING",                careers_url: "https://www.ing.jobs/global/en"}
+  - {name: "Rabobank",           careers_url: "https://rabobank.jobs/en/"}
+  - {name: "NN Group",           careers_url: "https://www.nn-group.com/careers.htm"}
+  - {name: "Deutsche Bank",      careers_url: "https://careers.db.com/"}
+  - {name: "BNP Paribas",        careers_url: "https://group.bnpparibas/en/careers"}
+
+settings:
+  use_model_scoring: true    # reads each posting for requirements/deadline/visa IF an
+                             # ANTHROPIC_API_KEY repo secret is set; otherwise falls back
+                             # to keyword extraction automatically (still works with no key)
+
+# Static firm assessment criteria, attached to every matching role from that firm.
+firm_criteria:
+  Optiver:        {assessment: "Online math (80-in-8) + number sequences, then a trading/market-making game and interviews", looks_for: "speed with accuracy, EV thinking, calm under pressure"}
+  IMC:            {assessment: "Cognitive games (BrainsFirst NeurOlympics), math, market-making case, behavioural", looks_for: "analytical intuition, clear reasoning, adaptability"}
+  Flow Traders:   {assessment: "Numerical/math test, market-making case, ETF/ETP knowledge, interviews", looks_for: "mental math, genuine markets interest, commercial drive"}
+  Da Vinci:       {assessment: "Math/probability test, market-making exercise, interviews", looks_for: "probability fluency, market-making instinct"}
+  All Options:    {assessment: "Math test (hosted on TradingInterview), market-making, interviews", looks_for: "fast accurate arithmetic, trading sense"}
+  SIG:            {assessment: "Quantitative evaluation, poker/EV-style reasoning, interviews", looks_for: "decision-making under uncertainty, EV mindset"}
+  DRW:            {assessment: "Mental math + probability + brainteasers; coding for some desks", looks_for: "quantitative reasoning, problem-solving"}
+  Akuna Capital:  {assessment: "Math/probability test, options theory, market-making", looks_for: "options intuition, quick estimation"}
+  Jump Trading:   {assessment: "Quantitative + probability rounds, often coding", looks_for: "rigorous quantitative thinking"}
+  Citadel Securities: {assessment: "Quantitative + brainteaser interviews", looks_for: "mathematical depth, precision"}
+  Jane Street:    {assessment: "Probability, mental math, market-making and estimation interviews", looks_for: "clear probabilistic reasoning, talk-aloud"}
+  Northpool:      {assessment: "Quantitative + energy-market case, interviews", looks_for: "modelling and markets sense (fits your power-market projects)"}
+  Mako:           {assessment: "Aptitude test + Codility coding round, options interviews", looks_for: "options theory, coding fluency"}
+  ABN AMRO:       {assessment: "CV screen, online assessment, behavioural + technical risk (VaR, FRTB, IRRBB)", looks_for: "risk fundamentals, communication"}
+  ING:            {assessment: "Online assessment, case, behavioural + technical risk", looks_for: "risk and modelling fundamentals"}
