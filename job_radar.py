@@ -232,6 +232,7 @@ def fit_score(job, cfg):
 
 def extract_requirements(desc):
     if not desc: return ""
+    desc = strip_html(desc)
     low = desc.lower()
     for marker in ["requirements", "qualifications", "what you", "you have", "we are looking",
                    "we're looking", "your profile", "skills", "who you are"]:
