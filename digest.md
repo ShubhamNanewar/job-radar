@@ -1,6 +1,6 @@
 # Job Radar — 2026-07-10
 
-2 matching roles open · 1 new since last run
+2 matching roles open · 0 new since last run
 
 
 ## Elsewhere in EU (2)
@@ -12,5 +12,5 @@
 - **Multi Trader** — B&amp;R HOME  
   London, · EU (verify sponsorship) · fit 20/100 · check · trading  
   apply: https://remoteOK.com/remote-jobs/remote-multi-trader-bampr-home-1134574
-  requirements: skills for internal jobs . Please mention the word **INSIGHTFULLY** and tag RNjguMTU0LjExNi4xMTI= when applying to show you read the job post completely (#RNjguMTU0LjExNi4xMTI=). This is a beta feature to avoid spam applicants. Companies can search these words to find applicants that read this and s
+  requirements: skills for internal jobs . Please mention the word **INSIGHTFULLY** and tag RNDAuNzYuMjM5Ljk2 when applying to show you read the job post completely (#RNDAuNzYuMjM5Ljk2). This is a beta feature to avoid spam applicants. Companies can search these words to find applicants that read this and see they'
 
