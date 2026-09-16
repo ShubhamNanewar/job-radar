@@ -1,6 +1,6 @@
 # Job Radar — 2026-09-16
 
-3 matching roles open · 1 new since last run
+3 matching roles open · 0 new since last run
 
 ## Amsterdam / Netherlands (1)
 
@@ -14,7 +14,7 @@
 - **Intern Quantitative Investment Analyst (f/m/d)** — Liqid Lam  
   Berlin · EU (verify sponsorship) · fit 68/100 · graduate/junior · trading  
   apply: https://www.arbeitnow.com/jobs/companies/liqid-lam/intern-quantitative-investment-analyst-berlin-347845
-  requirements: requirements for the position. Case Study : You will work on a typical situation you might encounter in this role. You will have about one week to complete the case study. Find more English Speaking Jobs in Germany on Arbeitnow
+  requirements: requirements for the position. Case Study : You will work on a typical situation you might encounter in this role. You will have about one week to complete the case study. Find Jobs in Germany on Arbeitnow
 - **Campus Full Time 2027 - Quantitative Trader - London** — Five Rings  
   London · EU (verify sponsorship) · fit 50/100 · check · trading  
   apply: https://job-boards.greenhouse.io/fiveringsllc/jobs/5255367008
