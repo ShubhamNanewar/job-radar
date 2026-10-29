@@ -1,6 +1,6 @@
 # Job Radar — 2026-10-29
 
-4 matching roles open · 2 new since last run
+4 matching roles open · 0 new since last run
 
 ## Amsterdam / Netherlands (3)
 
