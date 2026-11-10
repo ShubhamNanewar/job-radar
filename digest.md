@@ -1,4 +1,4 @@
-# Job Radar — 2026-11-09
+# Job Radar — 2026-11-10
 
 2 matching roles open · 0 new since last run
 
